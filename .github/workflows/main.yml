@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ssh key generate
-        run: echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        run: echo "$SSH_PRIVATE_KEY" > ~/id_rsa && chmod 600 ~/id_rsa
         env:
           SSH_PRIVATE_KEY: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
       - name: ssh and deploy
@@ -19,7 +19,7 @@ jobs:
           host: ${{ secrets.PROD_SSH_HOSTNAME }}
           username: ${{ secrets.PROD_SSH_USER }}
           port: ${{ secrets.PROD_SSH_PORT }}
-          key_path: ~/.ssh/id_rsa
+          key_path: ~/id_rsa
           script: |
             cd ${{ secrets.PROD_DEPLOY_DIR }}
             ls
