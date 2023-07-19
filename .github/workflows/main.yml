@@ -9,7 +9,6 @@ jobs:
     name: deploy-action-prod
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: ssh and deploy
         uses: appleboy/ssh-action@master
         with:
