@@ -9,17 +9,14 @@ jobs:
     name: deploy-action-prod
     runs-on: ubuntu-latest
     steps:
-      - name: ssh key generate
-        run: echo "$SSH_PRIVATE_KEY" > ~/id_rsa && chmod 600 ~/id_rsa
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
+      - uses: actions/checkout@v2
       - name: ssh and deploy
         uses: appleboy/ssh-action@master
         with:
+          key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
           host: ${{ secrets.PROD_SSH_HOSTNAME }}
           username: ${{ secrets.PROD_SSH_USER }}
           port: ${{ secrets.PROD_SSH_PORT }}
-          key_path: ~/id_rsa
           script: |
             cd ${{ secrets.PROD_DEPLOY_DIR }}
             ls
